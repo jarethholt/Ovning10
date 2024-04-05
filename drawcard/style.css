@@ -1,0 +1,25 @@
+body {
+    margin: 1em 2em;
+    background-color: rgb(16, 165, 16);
+}
+
+h1 {
+    text-align: center;
+}
+
+hr {
+    border: 1px solid gray;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 8em auto;
+}
+
+footer {
+    text-align: center;
+    background-color: rgb(18, 129, 18);
+    border: 1px solid rgb(18, 129, 18);
+    border-radius: 10px;
+    margin-top: 2em;
+}

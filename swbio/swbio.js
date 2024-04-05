@@ -50,7 +50,7 @@ function runSearch() {
 }
 
 // Attach the primary function to the search button/field
-inputButton.addEventListener('click', runSearch)
-inputField.addEventListener('keypress', function(e) {
+app.inputButton.addEventListener('click', runSearch)
+app.inputField.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') runSearch()
 })
