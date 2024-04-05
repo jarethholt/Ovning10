@@ -1,21 +1,23 @@
-// Constants
-const inputField = document.getElementById('inputField')
-const inputButton = document.getElementById('inputButton')
-const outputArea = document.getElementById('outputArea')
-const baseSWURL = new URL("https://www.swapi.tech/api/people/")
+// Global variables
+const app = {
+    inputField : document.getElementById('inputField'),
+    inputButton: document.getElementById('inputButton'),
+    outputArea : document.getElementById('outputArea'),
+    baseSWURL  : new URL("https://www.swapi.tech/api/people/"),
+}
 
 // Read the search contents when the button is pressed
 function readInput() {
-    let result = inputField.value
+    const result = app.inputField.value
     // Convert the result into a URL with search params
-    let params = new URLSearchParams({name: result})
-    let searchURL = new URL(baseSWURL.toString() + '?' + params.toString())
+    const params = new URLSearchParams({name: result})
+    const searchURL = new URL(app.baseSWURL.toString() + '?' + params.toString())
     return searchURL
 }
 
 // Convert a person record into a string
 function stringifyPerson(person) {
-    let props = person.properties
+    const props = person.properties
     let result = `${props.name}: `
     result += `Height ${props.height}, `
     result += `mass ${props.mass}, `
@@ -28,27 +30,26 @@ function stringifyPerson(person) {
 function onFailure(error) {
     alert(`Error encountered while searching: ${error}`)
     console.error(error)
-    return ''
 }
 
 // Determine what to do if the API succeeds
 function onSuccess(response) {
-    let result = response.result
-    let personStrings = []
+    const result = response.result
+    const personStrings = []
     for (const person of result) {
         personStrings.push(stringifyPerson(person))
     }
-    return personStrings.join('\n')
+    app.outputArea.innerHTML = personStrings.join('\n')
 }
 
 // Compose the functions together
-async function runSearch() {
-    let searchURL = readInput()
-    let response = await fetch(searchURL).then(res => res.json()).catch(onFailure)
-    let text = onSuccess(response)
-    outputArea.innerHTML = text
+// Should this be an async function since it uses fetch?
+function runSearch() {
+    const searchURL = readInput()
+    fetch(searchURL).then(res => res.json()).then(onSuccess).catch(onFailure)
 }
 
+// Attach the primary function to the search button/field
 inputButton.addEventListener('click', runSearch)
 inputField.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') runSearch()
