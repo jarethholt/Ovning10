@@ -1,25 +1,43 @@
 // Global variables
 const app = {
     drawButton: document.getElementById('drawcard'),
+    mainArea: document.getElementsByTagName('main').item(0),
     cardDiv: document.getElementById('cardDiv'),
     drawCardAPI: new URL("https://deckofcardsapi.com/api/deck/new/draw/?count=1"),
     cardImgWidth: 226,
-    cardImgHeight: 314
+    cardImgHeight: 314,
+    cardImg: null
 }
+
+// First thing to do is make an appropriate amount of space for the card
+function setupCardArea() {
+    app.mainArea.style.gridTemplateRows = `${app.cardImgHeight}px`;
+    app.cardDiv.style.width = `${app.cardImgWidth}px`;
+}
+setupCardArea()
+
+// Set up the image element to be used
+function setupImg() {
+    if (app.cardImg !== null) return
+    app.cardImg = document.createElement('img')
+    app.cardImg.setAttribute('width', app.cardImgWidth)
+    app.cardImg.setAttribute('height', app.cardImgHeight)
+}
+setupImg()
 
 // Get the link to the image from the API response
 function getImageLink(response) {
     return response.cards[0].image
 }
 
-// Insert an image into the card's div
+// Set the image in the card's div
 function insertImage(imageURL) {
-    // Create the image html
-    const img = document.createElement('img')
-    img.setAttribute('src', imageURL)
-    img.setAttribute('width', app.cardImgWidth)
-    img.setAttribute('height', app.cardImgHeight)
-    app.cardDiv.appendChild(img)
+    // Make sure the img tag is actually in the div
+    if (!app.cardDiv.contains(app.cardImg)) {
+        app.cardDiv.appendChild(app.cardImg)
+    }
+    app.cardDiv.classList.remove('blank')
+    app.cardImg.setAttribute('src', imageURL)
 }
 
 // What to run when the API call is successful
