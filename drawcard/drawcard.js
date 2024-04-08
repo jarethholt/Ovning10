@@ -25,25 +25,22 @@ function setupImg() {
 }
 setupImg()
 
-// Get the link to the image from the API response
-function getImageLink(response) {
-  return response.cards[0].image
-}
-
-// Set the image in the card's div
-function insertImage(imageURL) {
-  // Make sure the img tag is actually in the div
-  if (!app.cardDiv.contains(app.cardImg)) {
-    app.cardDiv.appendChild(app.cardImg)
-  }
-  app.cardDiv.classList.remove('blank')
-  app.cardImg.setAttribute('src', imageURL)
-}
-
 // What to run when the API call is successful
 function onSuccess(response) {
-  const imageURL = getImageLink(response)
-  insertImage(imageURL)
+  // Extract the image URL and a description of the card
+  const card = response.cards[0]
+  const imageURL = card.image
+  const cardDesc = `${card.value} of ${card.suit.toLowerCase()}`
+  // See if the img element is actually in the target div
+  // Since appendChild moves nodes, the if statement is technically unnecessary?
+  // Same applies to classList.remove; it does nothing if the class is missing
+  if (!app.cardDiv.contains(app.cardImg)) {
+    app.cardDiv.appendChild(app.cardImg)
+    app.cardDiv.classList.remove('blank')
+  }
+  // Set the attributes of the img element
+  app.cardImg.setAttribute('src', imageURL)
+  app.cardImg.setAttribute('alt', cardDesc)
 }
 
 // What to do when the API call fails
@@ -54,7 +51,10 @@ function onFailure(error) {
 
 // Full function to call the draw card API
 function drawCard() {
-  fetch(app.drawCardAPI).then(res => res.json()).then(onSuccess).catch(onFailure)
+  fetch(app.drawCardAPI)
+    .then(res => res.json())
+    .then(onSuccess)
+    .catch(onFailure)
 }
 
 // Attach the full function to the button
