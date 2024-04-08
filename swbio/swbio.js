@@ -18,11 +18,9 @@ function readInput() {
 // Convert a person record into a string
 function stringifyPerson(person) {
   const props = person.properties
-  let result = `${props.name}: `
-  result += `Height ${props.height}, `
-  result += `mass ${props.mass}, `
-  result += `gender ${props.gender}, `
-  result += `hair color ${props.hair_color}`
+  const result =
+      `${props.name}: Height ${props.height}, mass ${props.mass}, `
+    + `gender ${props.gender}, hair color ${props.hair_color}`
   return result
 }
 
