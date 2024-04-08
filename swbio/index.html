@@ -1,40 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Wars Bios</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Star Wars Bios</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <header>
-        <h1>Star Wars Biography Search</h1>
-        <p>
-            This page provides a way to access the <a href="https://www.swapi.tech">Star Wars API</a>
-            and search for different characters in the Star Wars universe.
-        </p>
-    </header>
+  <header>
+    <h1>Star Wars Biography Search</h1>
+    <p>
+      This page provides a way to access the <a href="https://www.swapi.tech">Star Wars API</a>
+      and search for different characters in the Star Wars universe.
+    </p>
+  </header>
+  <hr>
+
+  <main>
+    <p>Who do you want to search for?</p>
+    <!-- Input field for the search function -->
+    <div id="inputDiv">
+      <input type="text" id="inputField">
+      <button type="button" id="inputButton">Search</button>
+    </div>
     <hr>
 
-    <main>
-        <p>Who do you want to search for?</p>
-        <!-- Input field for the search function -->
-        <div id="inputDiv">
-            <input type="text" id="inputField">
-            <button type="button" id="inputButton">Search</button>
-        </div>
-        <hr>
+    <!-- Area where results are output -->
+    <div id="outputDiv">
+      <textarea id="outputArea" rows="5" readonly></textarea>
+    </div>
+  </main>
 
-        <!-- Area where results are output -->
-        <div id="outputDiv">
-            <textarea id="outputArea" rows="5" readonly></textarea>
-        </div>
-    </main>
-
-    <footer>
-        <p>Created by Jareth Holt &copy;2024</p>
-    </footer>
+  <footer>
+    <p>Created by Jareth Holt &copy;2024</p>
+  </footer>
 </body>
 
 <script type="text/javascript" src="swbio.js"></script>
