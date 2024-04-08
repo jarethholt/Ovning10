@@ -1,8 +1,8 @@
 // Global variables
 const app = {
-  inputField: document.getElementById('inputField'),
-  inputButton: document.getElementById('inputButton'),
-  outputArea: document.getElementById('outputArea'),
+  inputField: document.querySelector('#inputField'),
+  inputButton: document.querySelector('#inputButton'),
+  outputArea: document.querySelector('#outputArea'),
   baseSWURL: new URL("https://www.swapi.tech/api/people/"),
 }
 

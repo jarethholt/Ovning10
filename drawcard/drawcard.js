@@ -1,8 +1,8 @@
 // Global variables
 const app = {
-  drawButton: document.getElementById('drawcard'),
-  mainArea: document.getElementsByTagName('main').item(0),
-  cardDiv: document.getElementById('cardDiv'),
+  drawButton: document.querySelector('#drawcard'),
+  mainArea: document.querySelector('main'),
+  cardDiv: document.querySelector('#cardDiv'),
   drawCardAPI: new URL("https://deckofcardsapi.com/api/deck/new/draw/?count=1"),
   cardImgWidth: 226,
   cardImgHeight: 314,
